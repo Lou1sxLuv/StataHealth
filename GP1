@@ -1,0 +1,85 @@
+describe
+label variable name "Country"
+label variable male "life expectancy at birth of male"
+label variable female "life expectancy at birth of female"
+label variable totalp "Total population in a country (000s)"
+label variable s "Nation’s total area (km2)"
+label variable mmt "Maternal mortality ratioc (per 100 000 live births)"
+label variable hale "Healthy life expectancy "
+label variable hale "Healthy life expectancy (years)"
+label variable pobasp "POB attended by skilled health personnel (%)"
+label variable duf "Under-five mortality ratee (per 1000 live births) "
+label variable dn "Neonatal mortality rate (per 1000 live births)"
+label variable tb "Tuberculosis incidence (%)"
+label variable bvaccine "Infants receiving three doses of hepatitis B vaccine (%)"
+label variable dfa "Probability of dying from any of CVD, cancer, diabetes, CRD between age 30 and e"
+label variable smr "Suicide mortality rate (per 100 000 population)"
+label variable alcohol "Total alcohol per capita (>15 years of age)(Litre)"
+label variable trafficm "Road traffic mortality rate (per 100 000 population)"
+label variable adobirth "Adolescent birth rate (per 1000 women aged 15–19 years)"
+label variable ha "Mortality rate attributed to household and ambient air pollution (per 100 000 po"
+label variable wash "WASH"
+label variable poison "Mortality rate from unintentional poisoning (per 100 000 population)"
+label variable pos "Prevalence of stunting in children under 5u  (%)"
+label variable poo "Prevalence of overweight in children under 5u  (%)"
+label variable water "Proportion of population using improved drinking- water sources (%)"
+label variable sanitaion "Proportion of population using improved sanitation (%)"
+label variable cleanfuel "Proportion of population with primary reliance on clean fuels (%)"
+label variable dust "Annual mean concentrations of fine particulate matter (PM2.5) in urban areasx  ("
+label variable disater "Average death rate due to natural disastersy  (per 100 000 population)"
+label variable homicides "Mortality rate due to homicides (per 100 000 population)"
+label variable conflict "Estimated direct deaths from major conflicts (per 100 000 population)"
+label variable pow "Prevalence of wasting in children under 5u  (%)"
+label variable wash "WaSH (water, sanitation and hygiene)"
+label variable oecd "= 1 if member of OECD"
+des hale pobasp tb bvaccine alcohol adobirth mmt duf dn dfa trafficm wash s totalp male female oecd pos pow poo sanitaion cleanfuel dust homicides conflict
+su
+tab oecd 
+hist hale,kdens
+hist pobasp,kdens
+hist tb,kden
+hist bvaccine,kdens
+hist dfa,kdens
+hist alcohol,kdens
+hist adobirth, kdens
+hist mmt,kdens
+hist duf,kdens
+hist dn,kdens
+hist trafficm,kdens
+hist wash,kdens
+hist pos,kdens
+hist pow,kdens
+hist poo,kdens
+hist sanitaion, kdens
+hist dust, kdens
+hist homicides, kdens
+hist conflict, kdens
+hist cleanfuel, kdens
+gr twoway sc pobasp hale||lfit pobasp hale
+gr twoway sc tb hale||lfit tb hale
+gr twoway sc bvaccine hale||lfit bvaccine hale
+gr twoway sc dfa hale||lfit dfa hale
+gr twoway sc alcohol hale||lfit alcohol hale
+gr twoway sc adobirth hale||lfit adobirth hale
+gr twoway sc mmt hale||lfit mmt hale
+gr twoway sc duf hale||lfit duf hale
+gr twoway sc dn hale||lfit dn hale
+gr twoway sc trafficm hale||lfit trafficm hale
+gr twoway sc wash hale||lfit wash hale
+gr twoway sc pos hale||lfit pos hale
+gr twoway sc pow hale||lfit pow hale
+gr twoway sc poo hale||lfit poo hale
+gr twoway sc sanitaion hale||lfit sanitaion hale
+gr twoway sc cleanfuel hale||lfit cleanfuel hale
+gr twoway sc dust hale||lfit dust hale
+gr twoway sc homicides hale||lfit homicides hale
+gr twoway sc conflict hale||lfit conflict hale
+reg hale pobasp tb bvaccine alcohol adobirth mmt duf dn dfa trafficm wash s totalp male female oecd pos pow poo sanitaion cleanfuel dust homicides conflict 
+corr
+vif
+drop duf dn female male
+quietly reg hale pobasp tb bvaccine alcohol adobirth mmt dfa trafficm wash s totalp oecd pos pow poo sanitaion cleanfuel dust homicides conflict 
+vif
+hettest,rhs fstat
+imtest, white
+reg hale pobasp tb bvaccine alcohol adobirth mmt dfa trafficm wash s totalp oecd pos pow poo sanitaion cleanfuel dust homicides conflict 
